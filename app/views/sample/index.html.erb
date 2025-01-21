@@ -1,0 +1,24 @@
+<h1>Resque Queue Status</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Queue Name</th>
+      <th>Size</th>
+      <th>Processed</th>
+      <th>Failed</th>
+      <th>Pending</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @queues.each do |queue| %>
+      <tr>
+        <td><%= queue[:name] %></td>
+        <td><%= queue[:size] %></td>
+        <td><%= queue[:processed] %></td>
+        <td><%= queue[:failed] %></td>
+        <td><%= queue[:pending] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
