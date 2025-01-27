@@ -4,6 +4,11 @@ class SampleController < ApplicationController
     render plain: "Job has been enqueued!"
   end
 
+  def enqueue2
+    Resque.enqueue(SampleJob2, "World2")
+    render plain: "Job has been enqueued!2"
+  end
+
   def index
     # Resqueのキューとジョブの状態を取得
     @queues = Resque.queues.map do |queue_name|
@@ -12,7 +17,6 @@ class SampleController < ApplicationController
         size: Resque.size(queue_name),
         processed: Resque::Stat[:processed],
         failed: Resque::Stat[:failed],
-        pending: Resque.info[:pending]
       }
     end
   end
