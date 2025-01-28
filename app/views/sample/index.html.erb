@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Queue Name</th>
-      <th>Size</th>
+      <th>pending</th>
       <th>Processed</th>
       <th>Failed</th>
     </tr>
@@ -13,7 +13,7 @@
     <% @queues.each do |queue| %>
       <tr>
         <td><%= queue[:name] %></td>
-        <td><%= queue[:size] %></td>
+        <td><%= queue[:pending] %></td>
         <td><%= queue[:processed] %></td>
         <td><%= queue[:failed] %></td>
       </tr>
