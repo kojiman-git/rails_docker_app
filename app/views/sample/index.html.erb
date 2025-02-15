@@ -6,9 +6,9 @@
       <th>Queue Name</th>
       <th>Pending</th>
       <th>Processed</th>
-      <th>Failed</th>
-      <th>Last Executed</th>
       <th>Workers</th>
+      <th>Working</th>
+      <th>Failed</th>
     </tr>
   </thead>
   <tbody>
@@ -17,9 +17,9 @@
         <td><%= queue[:name] %></td>
         <td><%= queue[:pending] %></td>
         <td><%= queue[:processed] %></td>
-        <td><%= queue[:failed] %></td>
-        <td><%= queue[:last_executed] || 'N/A' %></td>
         <td><%= queue[:workers] %></td>
+        <td><%= queue[:working] %></td>
+        <td><%= queue[:failed] %></td>
       </tr>
     <% end %>
   </tbody>

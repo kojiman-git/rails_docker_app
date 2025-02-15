@@ -24,9 +24,9 @@ class SampleController < ApplicationController
         name: queue_name,
         pending: Resque.size(queue_name),
         processed: Resque.redis.get("queue:#{queue_name}:processed").to_i,
+        workers: Resque.workers.count { |w| w.queues.include?(queue_name) },
+        working: Resque.working.count { |w| w.queues.include?(queue_name) },
         failed: Resque.redis.get("queue:#{queue_name}:failed").to_i,
-        last_executed: Resque.redis.get("queue:#{queue_name}:last_executed"),
-        workers: Resque.workers.count { |w| w.queues.include?(queue_name) }
       }
     }
   end
