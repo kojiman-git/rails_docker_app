@@ -23,10 +23,10 @@ class SampleController < ApplicationController
       {
         name: queue_name,
         pending: Resque.size(queue_name),
-        processed: Resque.redis.get("queue:#{queue_name}:processed").to_i,
+        processed: Resque.redis.get("processed:#{queue_name}").to_i,
         workers: Resque.workers.count { |w| w.queues.include?(queue_name) },
         working: Resque.working.count { |w| w.queues.include?(queue_name) },
-        failed: Resque.redis.get("queue:#{queue_name}:failed").to_i,
+        failed: Resque.redis.get("failed:#{queue_name}").to_i,
       }
     }
   end
