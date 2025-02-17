@@ -1,6 +1,4 @@
 class SampleJob2 
-  extend QueueProcessedTracker, QueueFailedTracker
-
   @queue = :sample_queue2
 
   def self.perform(name)

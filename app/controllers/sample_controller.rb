@@ -14,20 +14,20 @@ class SampleController < ApplicationController
 
   def index
     @queues = fetch_queue_status
+    @total_processed = Resque::Stat.get(:processed)
+    @total_failed = Resque::Stat.get(:failed)
   end
   
   private
   
   def fetch_queue_status
-    Resque.queues.map { |queue_name|
+    Resque.queues.map do |queue_name|
       {
         name: queue_name,
         pending: Resque.size(queue_name),
-        processed: Resque.redis.get("processed:#{queue_name}").to_i,
         workers: Resque.workers.count { |w| w.queues.include?(queue_name) },
-        working: Resque.working.count { |w| w.queues.include?(queue_name) },
-        failed: Resque.redis.get("failed:#{queue_name}").to_i,
+        working: Resque.working.count { |w| w.queues.include?(queue_name) }
       }
-    }
+    end
   end
 end
